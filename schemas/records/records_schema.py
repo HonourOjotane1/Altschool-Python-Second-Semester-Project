@@ -9,9 +9,6 @@ class BorrowRecordBase(BaseModel):
     borrow_date: date = Field(default_factory=date.today)
     return_date: Optional[date] = None
 
-    # class Config:
-    #     orm_mode = True
-
 
 class BorrowRecordCreate(BaseModel):
     book_id: int
@@ -21,5 +18,3 @@ class BorrowRecordCreate(BaseModel):
 
 class BorrowRecord(BorrowRecordBase):
     id: int
-
-

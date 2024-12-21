@@ -21,7 +21,6 @@ def get_books_by_id(book_id: int):
 @books_router.post("/")
 def create_new_book(payload: BookCreate):
     new_book = BookCRUD.create_new_book(payload)
-    # books.append(new_book)
     return {"message": "successfully created book!", "data": (new_book)}
 
 
@@ -47,12 +46,6 @@ def borrow_book(book_id: int):
 @books_router.put("/{book_id}/Borrow")
 def return_book(book_id: int):
     return BookCRUD.return_book(book_id)
-
-
-# @books_router.delete("/{book_id}")
-# def delete_book(book_id: int):
-#     result = BookCRUD.delete_book(book_id)
-#     return result
 
 
 @books_router.delete("/{book_id}")

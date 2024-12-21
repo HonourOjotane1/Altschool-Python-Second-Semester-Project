@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from schemas.users.users_schema import User, User_Base, User_Create, User_Delete, User_Update
+from schemas.users.users_schema import User_Create, User_Update
 from crud.users.users_crud import UsersCRUD
 
 
@@ -32,7 +32,6 @@ def update_user(user_id: int, payload: User_Update):
         raise HTTPException(status_code=404, detail="User not found!")
     updated_user = UsersCRUD.update_user(expected_user, payload)
     return {"message": "Success", "data": updated_user}
-
 
 
 @users_router.put("/{user_id}/deactivate")

@@ -20,16 +20,6 @@ class RecordsCRUD:
                 return record
         raise HTTPException(status_code=404, detail="Borrow record not found")
 
-    
-
-    # @staticmethod
-    # def get_records_by_user(user_id: int):
-    #     user_records = [record for record in borrow_records
-    #                     if record.user_id == user_id]
-    #     if not user_records:
-    #         raise HTTPException(status_code=404,
-    #                             detail="No borrow records found for this user")
-    #     return user_records
     @staticmethod
     def create_borrow_record(record: BorrowRecordCreate):
         new_record = BorrowRecord(
@@ -38,7 +28,7 @@ class RecordsCRUD:
             book_id=record.book_id,
             borrow_date=record.borrow_date,
             return_date=None
-            
+
         )
         borrow_records.append(new_record)
         return new_record
@@ -47,7 +37,7 @@ class RecordsCRUD:
     def borrow_book(user_id: int, book_id: int, borrow_date: date,
                     return_date: date | None):
 
-        # Validate User
+        # code to Validate User
         user = UsersCRUD.get_user_by_id(user_id)
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
@@ -56,7 +46,7 @@ class RecordsCRUD:
 
         book = BookCRUD.get_book_by_id(book_id)
 
-        # Validate Book
+        # code to Validate Book
         if not book:
             raise HTTPException(status_code=404, detail="Book not found")
         if not book.is_available:
@@ -67,7 +57,7 @@ class RecordsCRUD:
             raise HTTPException(status_code=400,
                                 detail="User has already borrowed this book")
 
-        # Mark book as unavailable
+        # code to Mark book as unavailable
         book.is_available = False
 
         # create book record
@@ -110,14 +100,12 @@ class RecordsCRUD:
 
         record.return_date = datetime.now().date()
 
-        # Mark book as available
+        # code to Mark book as available
         book = BookCRUD.get_book_by_id(record.book_id)
         if book:
             book.is_available = True
 
-        # record = RecordsCRUD.get_borrow_record(record_id)
         return record
-
 
     @staticmethod
     def check_user_has_borrowed(user_id: int, book_id: int):

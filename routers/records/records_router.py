@@ -21,18 +21,6 @@ async def create_borrow_record(record: BorrowRecordCreate):
     return RecordsCRUD.create_borrow_record(record)
 
 
-# @records_router.get("/record/{user_id}")
-# async def get_borrow_record_by_User(user_id):
-#     return RecordsCRUD.get_borrow_record_by_user(user_id)
-
-# @records_router.get("/records/user/{user_id}",
-#                     response_model=list[BorrowRecord])
-# async def get_records_by_user(user_id: int):
-#     return RecordsCRUD.get_records_by_user(user_id)
-# @records_router.get("/borrow")
-# async def borrow_book(user_id: int, book_id: int):
-#     return RecordsCRUD.borrow_book()
-
 @records_router.post("/borrow", response_model=BorrowRecordCreate)
 async def borrow_book(user_id: int, book_id: int,
                       borrow_date: date,
@@ -54,5 +42,3 @@ async def get_borrow_record_by_user(user_id: int):
 @records_router.put("/borrow/{record_id}/return", response_model=BorrowRecord)
 async def return_book(record_id: int):
     return RecordsCRUD.return_book(record_id)
-
-
